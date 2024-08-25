@@ -23,6 +23,14 @@ router.post("/login", function (req, res) {
     const { email, password } = req.body;
     //일단 백엔드로 잘 넘어오는지 체크하기 위해 출력 좀 해볼까?
     console.log(`email: ${email}, pwd: ${password}`);
+    if (email == db.collection("user").findOne({ email: email })) {
+      if (password == db.collection("user").findOne({ password: password })) {
+      } else {
+        req.setEncoding("비밀번호가 틀림");
+      }
+    } else {
+      req.setEncoding("꺼지셈");
+    }
   } catch (err) {}
 });
 module.exports = router;
